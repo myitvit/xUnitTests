@@ -6,5 +6,7 @@ public class PlayerCharacterShould
     public void BeInexpiriencedWhenNew()
     {
         PlayerCharacter sut = new PlayerCharacter();
+
+        Assert.True(sut.IsNoob);
     }
 }
