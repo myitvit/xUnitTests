@@ -8,7 +8,7 @@ namespace GameEngine
     public class PlayerCharacter : INotifyPropertyChanged
     {
         private int _health = 100;
-        
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
@@ -18,7 +18,7 @@ namespace GameEngine
             get => _health;
             set
             {
-                _health = value; 
+                _health = value;
                 OnPropertyChanged();
             }
         }
@@ -37,8 +37,8 @@ namespace GameEngine
         }
 
         public void Sleep()
-        {           
-            var healthIncrease = CalculateHealthIncrease();            
+        {
+            var healthIncrease = CalculateHealthIncrease();
 
             Health += healthIncrease;
 
@@ -52,7 +52,7 @@ namespace GameEngine
             return rnd.Next(1, 101);
         }
 
-        
+
         protected virtual void OnPlayerSlept(EventArgs e)
         {
             PlayerSlept?.Invoke(this, e);
