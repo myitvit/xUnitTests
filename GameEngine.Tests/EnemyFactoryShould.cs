@@ -57,5 +57,16 @@
 
             Assert.IsAssignableFrom<Enemy>(enemy);
         }
+
+        [Fact]
+        public void CreateSerparateInstances()
+        {
+            EnemyFactory sut = new EnemyFactory();
+
+            Enemy enemy1 = sut.Create("Zombie");
+            Enemy enemy2 = sut.Create("Zombie");
+
+            Assert.NotSame(enemy1, enemy2);
+        }
     }
 }
