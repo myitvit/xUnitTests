@@ -174,5 +174,14 @@ namespace GameEngine.Tests
         }
 
         #endregion
+
+
+        [Fact(Skip = "Skipping Test")]
+        public void BeNotInexpiriencedWhenNew()
+        {
+            PlayerCharacter sut = new PlayerCharacter();
+
+            Assert.False(sut.IsNoob);
+        }
     }
 }
