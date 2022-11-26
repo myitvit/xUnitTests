@@ -2,7 +2,7 @@ using System;
 
 namespace GameEngine.Tests
 {
-
+    [Trait("Category", "Player")]
     public class PlayerCharacterShould
     {
         [Fact]
