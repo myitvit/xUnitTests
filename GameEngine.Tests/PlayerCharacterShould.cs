@@ -1,23 +1,37 @@
-using System;
+using Xunit.Abstractions;
 
 namespace GameEngine.Tests
 {
     [Trait("Category", "Player")]
-    public class PlayerCharacterShould
+    public class PlayerCharacterShould : IDisposable
     {
+
+        private readonly PlayerCharacter sut;
+
+        private readonly ITestOutputHelper output;
+
+        public PlayerCharacterShould(ITestOutputHelper output)
+        {
+            this.sut = new PlayerCharacter();
+
+            this.output = output;
+        }
+        public void Dispose()
+        {
+            output.WriteLine($"Disposing PlayerCharacter {sut.FullName}");
+
+            //sut.Dispose();
+        }
+
         [Fact]
         public void BeInexpiriencedWhenNew()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.True(sut.IsNoob);
         }
 
         [Fact]
         public void CalculateFullName()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.FirstName = "Sarah";
             sut.LastName = "Smith";
 
@@ -27,8 +41,6 @@ namespace GameEngine.Tests
         [Fact]
         public void HaveFullNameStartingWithFirstName()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.FirstName = "Sarah";
             sut.LastName = "Smith";
 
@@ -38,8 +50,6 @@ namespace GameEngine.Tests
         [Fact]
         public void HaveFullNameEndingWithLastName()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.FirstName = "Sarah";
             sut.LastName = "Smith";
 
@@ -49,8 +59,6 @@ namespace GameEngine.Tests
         [Fact]
         public void CalculateFullName_IgnoreCaseAssertExample()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.FirstName = "SARAH";
             sut.LastName = "SMITH";
 
@@ -60,8 +68,6 @@ namespace GameEngine.Tests
         [Fact]
         public void CalculateFullName_SubsringAssertExample()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.FirstName = "Sarah";
             sut.LastName = "Smith";
 
@@ -71,8 +77,6 @@ namespace GameEngine.Tests
         [Fact]
         public void CalculateFullNameWithTitleCase()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.FirstName = "Sarah";
             sut.LastName = "Smith";
 
@@ -82,16 +86,12 @@ namespace GameEngine.Tests
         [Fact]
         public void StartWithDefaultHealh()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.Equal(100, sut.Health);
         }
 
         [Fact]
         public void IncreaseHealthAfterSleeping()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             sut.Sleep(); // Expect increase between 1 to 100 inclusive
 
             Assert.InRange(sut.Health, 101, 200);
@@ -100,40 +100,30 @@ namespace GameEngine.Tests
         [Fact]
         public void NotHaveNickNameByDefault()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.Null(sut.Nickname);
         }
 
         [Fact]
         public void HaveALongBow()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.Contains("Long Bow", sut.Weapons);
         }
 
         [Fact]
         public void NotHaveAStuffOfWonder()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.DoesNotContain("Staff of Wonder", sut.Weapons);
         }
 
         [Fact]
         public void HaveAtLeastOneKindOfSword()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.Contains(sut.Weapons, weapon => weapon.Contains("Sword"));
         }
 
         [Fact]
         public void HaveAllExpectedWeapons()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             var expectedWeapons = new[]
             {
             "Long Bow",
@@ -147,8 +137,6 @@ namespace GameEngine.Tests
         [Fact]
         public void HaveNoEmptyDefaultWeapons()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.All(sut.Weapons, weapon => Assert.False(string.IsNullOrWhiteSpace(weapon)));
         }
 
@@ -157,8 +145,6 @@ namespace GameEngine.Tests
         [Fact]
         public void ReaiseSleptEvent()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.Raises<EventArgs>(
                 handler => sut.PlayerSlept += handler,
                 handler => sut.PlayerSlept -= handler,
@@ -168,8 +154,6 @@ namespace GameEngine.Tests
         [Fact]
         public void RaisePropertyChangedEvent()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.PropertyChanged(sut, "Health", () => sut.TakeDamage(10));
         }
 
@@ -179,8 +163,6 @@ namespace GameEngine.Tests
         [Fact(Skip = "Skipping Test")]
         public void BeNotInexpiriencedWhenNew()
         {
-            PlayerCharacter sut = new PlayerCharacter();
-
             Assert.False(sut.IsNoob);
         }
     }
