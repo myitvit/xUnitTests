@@ -16,6 +16,8 @@ namespace GameEngine.Tests
             sut = new BossEnemy();
         }
 
+        #region 07. Asserting on Floating Point Values
+
         [Fact]
         public void HaveCorrectPower()
         {
@@ -23,5 +25,7 @@ namespace GameEngine.Tests
 
             Assert.Equal(166.667, sut.TotalSpecialAttackPower, 3);
         }
+
+        #endregion
     }
 }

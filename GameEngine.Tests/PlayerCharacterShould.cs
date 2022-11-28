@@ -23,11 +23,17 @@ namespace GameEngine.Tests
             //sut.Dispose();
         }
 
+        #region 04. Adding an Assert Against Bool value
+
         [Fact]
         public void BeInexpiriencedWhenNew()
         {
             Assert.True(sut.IsNoob);
         }
+
+        #endregion
+
+        #region 05. Making Assertions Against String Values
 
         [Fact]
         public void CalculateFullName()
@@ -83,6 +89,10 @@ namespace GameEngine.Tests
             Assert.Matches("[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+", sut.FullName);
         }
 
+        #endregion
+
+        #region 06. Asserting on Numeric Values
+
         [Fact]
         public void StartWithDefaultHealh()
         {
@@ -97,11 +107,19 @@ namespace GameEngine.Tests
             Assert.InRange(sut.Health, 101, 200);
         }
 
+        #endregion
+
+        #region 08. Asserting Null Values
+
         [Fact]
         public void NotHaveNickNameByDefault()
         {
             Assert.Null(sut.Nickname);
         }
+
+        #endregion
+
+        #region 09. Asserting with Collections
 
         [Fact]
         public void HaveALongBow()
@@ -140,6 +158,8 @@ namespace GameEngine.Tests
             Assert.All(sut.Weapons, weapon => Assert.False(string.IsNullOrWhiteSpace(weapon)));
         }
 
+        #endregion
+
         #region 13. Asserting That Events Are Raised
 
         [Fact]
@@ -159,11 +179,14 @@ namespace GameEngine.Tests
 
         #endregion
 
+        #region 4. 04. Skipping Tests
 
         [Fact(Skip = "Skipping Test")]
         public void BeNotInexpiriencedWhenNew()
         {
             Assert.False(sut.IsNoob);
         }
+
+        #endregion
     }
 }

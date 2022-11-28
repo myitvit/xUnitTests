@@ -16,6 +16,8 @@ namespace GameEngine.Tests
             this.output = output;
         }
 
+        #region 10. Making Asserts Against Object Types
+
         [Fact]
         public void CreateNormalEnemyByDefault()
         {
@@ -62,6 +64,10 @@ namespace GameEngine.Tests
             Assert.IsAssignableFrom<Enemy>(enemy);
         }
 
+        #endregion
+
+        #region 11. Asserting on Object Instances
+
         [Fact]
         public void CreateSerparateInstances()
         {
@@ -70,6 +76,10 @@ namespace GameEngine.Tests
 
             Assert.NotSame(enemy1, enemy2);
         }
+
+        #endregion
+
+        #region 12. Asserting That Code Throws the Correct Exceptions
 
         [Fact]
         public void NotAllowNullName()
@@ -86,5 +96,7 @@ namespace GameEngine.Tests
 
             Assert.Equal("Zombie", ex.RequestedEnemyName);
         }
+
+        #endregion
     }
 }
