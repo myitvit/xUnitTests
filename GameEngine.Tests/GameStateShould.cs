@@ -1,23 +1,34 @@
-﻿namespace GameEngine.Tests
+﻿using Xunit.Abstractions;
+
+namespace GameEngine.Tests
 {
 
     [Trait("Category", "GameSate")]
-    public class GameStateShould
+    public class GameStateShould : IClassFixture<GameStateFixture>
     {
+        private readonly GameStateFixture fixture;
+        private readonly ITestOutputHelper output;
+
+        public GameStateShould(GameStateFixture fixture, ITestOutputHelper output)
+        {
+            this.fixture = fixture;
+            this.output = output;
+        }
+
         [Fact]
         public void DamageAllPlayersWhenEarthquake()
         {
-            var sut = new GameState();
+            output.WriteLine($"GameState ID={fixture.State.Id}");
 
             var player1 = new PlayerCharacter();
             var player2 = new PlayerCharacter();
 
-            sut.Players.Add(player1);
-            sut.Players.Add(player2);
+            fixture.State.Players.Add(player1);
+            fixture.State.Players.Add(player2);
 
             var expectedHealthAfterEarthquake = player1.Health - GameState.EarthquakeDamage;
 
-            sut.Earthquake();
+            fixture.State.Earthquake();
 
             Assert.Equal(expectedHealthAfterEarthquake, player1.Health);
             Assert.Equal(expectedHealthAfterEarthquake, player2.Health);
@@ -26,17 +37,17 @@
         [Fact]
         public void Reset()
         {
-            var sut = new GameState();
+            output.WriteLine($"GameState ID={fixture.State.Id}");
 
             var player1 = new PlayerCharacter();
             var player2 = new PlayerCharacter();
 
-            sut.Players.Add(player1);
-            sut.Players.Add(player2);
+            fixture.State.Players.Add(player1);
+            fixture.State.Players.Add(player2);
 
-            sut.Reset();
+            fixture.State.Reset();
 
-            Assert.Empty(sut.Players);
+            Assert.Empty(fixture.State.Players);
         }
     }
 }
