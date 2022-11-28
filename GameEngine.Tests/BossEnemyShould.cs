@@ -7,17 +7,19 @@ namespace GameEngine.Tests
     {
         private readonly ITestOutputHelper _output;
 
+        private readonly BossEnemy sut;
+
         public BossEnemyShould(ITestOutputHelper output)
         {
             _output = output;
+
+            sut = new BossEnemy();
         }
 
         [Fact]
         public void HaveCorrectPower()
         {
             _output.WriteLine("Creating Boss Enemy");
-
-            BossEnemy sut = new BossEnemy();
 
             Assert.Equal(166.667, sut.TotalSpecialAttackPower, 3);
         }

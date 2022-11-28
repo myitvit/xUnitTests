@@ -12,7 +12,7 @@ namespace GameEngine.Tests
 
         public PlayerCharacterShould(ITestOutputHelper output)
         {
-            this.sut = new PlayerCharacter();
+            sut = new PlayerCharacter();
 
             this.output = output;
         }
