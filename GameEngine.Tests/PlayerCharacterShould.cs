@@ -188,5 +188,41 @@ namespace GameEngine.Tests
         }
 
         #endregion
+
+        #region 5. 03. Adding Extra PlayerCharacter Tests
+
+        [Fact]
+        public void TakeZeroDamage()
+        {
+            sut.TakeDamage(0);
+
+            Assert.Equal(100, sut.Health);
+        }
+
+        [Fact]
+        public void TakeSmallDamage()
+        {
+            sut.TakeDamage(1);
+
+            Assert.Equal(99, sut.Health);
+        }
+
+        [Fact]
+        public void TakeMediumDamage()
+        {
+            sut.TakeDamage(50);
+
+            Assert.Equal(50, sut.Health);
+        }
+
+        [Fact]
+        public void TakeMinimum1Health()
+        {
+            sut.TakeDamage(101);
+
+            Assert.Equal(1, sut.Health);
+        }
+
+        #endregion
     }
 }
