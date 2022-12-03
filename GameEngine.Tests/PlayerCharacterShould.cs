@@ -190,10 +190,7 @@ namespace GameEngine.Tests
         #endregion
 
         [Theory]
-        [InlineData(0, 100)]
-        [InlineData(1, 99)]
-        [InlineData(50, 50)]
-        [InlineData(101, 1)]
+        [HealthDamageData]
         public void TakeDamage(int damage, int expectedHealth)
         {
             sut.TakeDamage(damage);
